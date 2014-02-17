@@ -1,7 +1,5 @@
 package ece.uprm.edu.icom4015.chatapp;
 
-import java.net.URL;
-
 import javax.swing.JTextField;
 
 public class MyChatEngine extends ChatEngine {
@@ -17,27 +15,41 @@ public class MyChatEngine extends ChatEngine {
 	}
 
 	@Override
-	public boolean checkRoomImp(String roomNumber, URL url) {
-		// TODO Auto-generated method stub
-		return true;
+	public boolean checkRoomImp(String roomName, String url) {
+		String[] parameters = {
+			"room="+roomName	
+		};
+		String result = HTTPConnetor.sendGet(url,parameters , System.out);
+		return result.contains("\"success\":true");
 	}
 
 	@Override
-	public boolean enterRoomImp(String roomNumber, URL url) {
-		// TODO Auto-generated method stub
-		return true;
+	public boolean registerUserInRoomImp(String roomName, String name, String url) {
+		String[] parameters = {
+			"room="+roomName,
+			"name="+name
+		};
+		String result = HTTPConnetor.sendPost(url,parameters , System.out);
+		return result.contains("\"success\":true");
 	}
 
 	@Override
-	public boolean sendMessageImp(String message, URL url) {
+	public boolean sendMessageImp(String roomName, String name, String message,
+			MyWebSocket socket) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public void exitRoomImp(String name2, String roomNum2, URL server2) {
-		// TODO Auto-generated method stub
-		
+	public boolean exitRoomImp(String roomName, String name, String url) {
+		String[] parameters = {
+			"room="+roomName,
+			"name="+name
+		};
+		String result = HTTPConnetor.sendPost(url,parameters , System.out);
+		return result.contains("\"success\":true");
 	}
+
+	
 
 }

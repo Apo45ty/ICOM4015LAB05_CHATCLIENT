@@ -20,7 +20,9 @@ public class EnterPanel extends SimplePanel{
 		eButton.setActionCommand("enterRoom");
 		eButton.setName("enter");
 		
-		String roomNames[] = new String[20]; 
+		
+		String[] roomNames = getChatNames();
+		
 		JComboBox<String> combo = new JComboBox<String>(roomNames);
 		combo.setName("roomDropDown");
 		combo.setActionCommand("checkRoom");
@@ -49,6 +51,19 @@ public class EnterPanel extends SimplePanel{
 		this.add(status,BorderLayout.PAGE_END);
 		
 		this.setBorder(new EmptyBorder(20,20,20,20));
+	}
+
+	private String[] getChatNames() {
+		String knownNames[] = {
+				"b/",
+				"irc",
+				"Mofongo"
+		};
+		String roomNames[] = new String[20]; 
+		for(int i=1;i<=20;i++){
+			roomNames[i-1]=knownNames[(i-1)%knownNames.length]+((i-1)/knownNames.length);
+		}
+		return roomNames;
 	}
 	
 	/**
