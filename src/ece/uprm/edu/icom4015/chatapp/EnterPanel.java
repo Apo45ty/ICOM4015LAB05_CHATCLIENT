@@ -15,7 +15,7 @@ import javax.swing.border.EmptyBorder;
 public class EnterPanel extends SimplePanel{
 
 	@Override
-	void init() {
+	public void init() {
 		JButton eButton = new JButton("Enter");
 		eButton.setActionCommand("enterRoom");
 		eButton.setName("enter");

@@ -18,7 +18,6 @@ public class ChatApp implements WindowListener{
 	 */
 	JFrame mainPane;
 	ChatEngine ngin;
-	private Thread nginThread;
 	
 	/**
 	 * Sets all variables properly
@@ -87,8 +86,7 @@ public class ChatApp implements WindowListener{
 		mainPane.setVisible(true);
 		mainPane.setDefaultCloseOperation(mainPane.EXIT_ON_CLOSE);
 		mainPane.setSize(680, 520);
-		nginThread = new Thread(ngin);
-		nginThread.start();
+		ngin.start();
 	}
 
 	@Override
@@ -105,7 +103,14 @@ public class ChatApp implements WindowListener{
 
 	@Override
 	public void windowClosing(WindowEvent e) {
-		nginThread.stop();
+		ngin.stop();
+		try{
+			ngin.exitRoom();
+			
+		} catch(Exception except){
+			System.out.println(except);
+		
+		}
 	}
 
 	@Override

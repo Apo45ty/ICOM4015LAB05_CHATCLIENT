@@ -1,6 +1,7 @@
 package ece.uprm.edu.icom4015.chatapp;
 
 import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
@@ -8,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -15,16 +17,19 @@ import javax.swing.border.EmptyBorder;
 public class ChatPanel extends SimplePanel{
 
 	@Override
-	void init() {
+	public void init() {
 		
 		/**
 		 * Text Area
 		 */
-		JTextArea chatArea = new JTextArea("Welcome");
+		JTextArea chatArea = new JTextArea("Welcome",40,10);
 		chatArea.setName("chatArea");
 		chatArea.setPreferredSize(new Dimension(630,300));
 		chatArea.setEditable(false);
-		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setPreferredSize(new Dimension(630,300));
+		scrollPane.setViewportView(chatArea);
+		scrollPane.setName("scrollPane");
 		/**
 		 * Button Bar
 		 */
@@ -47,7 +52,7 @@ public class ChatPanel extends SimplePanel{
 		 * Main Pane
 		 */
 		JPanel chatPane = new JPanel();
-		chatPane.add(chatArea,BorderLayout.CENTER);
+		chatPane.add(scrollPane,BorderLayout.CENTER);
 		chatPane.add(buttonPane,BorderLayout.PAGE_END);
 		chatPane.setPreferredSize(new Dimension(630,350));
 		

@@ -49,14 +49,18 @@ public abstract class SimplePanel extends JPanel {
 			if(comp instanceof JButton){
 				JButton butt = (JButton)comp;
 				butt.addActionListener(listener);
+				butt.addKeyListener(listener);
 			} else if(comp instanceof JTextField){
 				JTextField field = (JTextField)comp;
 				field.addActionListener(listener);
+				field.addKeyListener(listener);
 			} else if(comp instanceof JComboBox){
 				JComboBox field = (JComboBox)comp;
 				field.addActionListener(listener);
+				field.addKeyListener(listener);
 			}else if(comp instanceof JTextArea){
 				JTextArea text = (JTextArea) comp;
+				text.addKeyListener(listener);
 				text.addKeyListener(listener);
 			} else if(comp instanceof JLabel){
 				JLabel text = (JLabel) comp;
@@ -79,6 +83,6 @@ public abstract class SimplePanel extends JPanel {
 	/**
 	 * Create the UI don't mind adding the listener
 	 */
-	abstract void init();
+	public abstract void init();
 	
 }

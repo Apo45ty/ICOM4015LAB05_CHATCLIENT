@@ -20,6 +20,7 @@ public class MyChatEngine extends ChatEngine {
 			"room="+roomName	
 		};
 		String result = HTTPConnetor.sendGet(url,parameters , System.out);
+		
 		return result.contains("\"success\":true");
 	}
 
@@ -30,14 +31,24 @@ public class MyChatEngine extends ChatEngine {
 			"name="+name
 		};
 		String result = HTTPConnetor.sendPost(url,parameters , System.out);
+		logStatus(result.split("\"description\":")[1]);
 		return result.contains("\"success\":true");
 	}
+
 
 	@Override
 	public boolean sendMessageImp(String roomName, String name, String message,
 			MyWebSocket socket) {
-		// TODO Auto-generated method stub
-		return false;
+		String JSON = "{"+
+				"\"name\":"+"\""+name+"\""+
+				",\"message\":"+"\""+message+"\""+
+				",\"room\":"+"\""+roomName+"\""+
+				",\"isMessage\":true"+
+				",\"acknowledge\":true"+
+		"}";
+		
+		String responce = socket.sendAndWaitAcknowledgment(JSON);
+		return responce.contains("\"success\":true");
 	}
 
 	@Override
